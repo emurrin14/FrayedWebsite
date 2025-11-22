@@ -1,0 +1,5 @@
+<svg class="profileicon" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="none">
+                  <path stroke="#000" stroke-width="2" d="M29.063 15A14.063 14.063 0 0 1 15 29.063 14.063 14.063 0 0 1 .938 15a14.063 14.063 0 0 1 28.125 0z"/>
+                  <path stroke="#000" stroke-width="2" d="M20.625 10.313A5.625 5.625 0 0 1 15 15.938a5.625 5.625 0 0 1-5.625-5.625 5.625 5.625 0 0 1 11.25 0z"/>
+                  <path d="M5.625 25.313c0-4.688 3.75-9.375 9.375-9.375s9.375 4.688 9.375 9.375" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>

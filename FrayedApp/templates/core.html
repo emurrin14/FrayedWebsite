@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/core.css' %}" />
+
+  <!-- JS -->
+  <script src="{% static 'js/core.js' %}" defer></script>
+  <script src="{% static 'js/topbar.js' %}" defer></script>
+
+  <!-- Preload fonts/images -->
+  <link rel="preload" href="{% static 'fonts/bc-sklonar-medium.woff2' %}" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="{% static 'images/landingImage0.PNG' %}" as="image" type="image/png">
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  {% include 'components/topbar.html' %}
+  {% include 'components/header.html' %}
+
+  <main>{% block content %}{% endblock %}</main>
+
+  {% include 'components/footer.html' %}
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
