@@ -1,0 +1,59 @@
+{% extends "core.html" %}
+{% load static %}
+{% block title %}Product-Page{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}" />
+<script src="{% static 'js/product.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="gridContainer">
+        <div class="productImageGridContainer">
+            {% for image in product.images.all %}
+            <div class="imageContainer">
+                <img src="{{ image.image.url }}" alt="{{ product.title }}">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="productDetailsContainer">
+            <div class="productTags">
+                {% for tag in product.tags.all %}
+                    <p>{{ tag.name }}</p>
+                {% endfor %}
+            </div>
+            <div class="productInformation">
+                <div class="productTitle">{{ product.title }}</div>
+                <div class="productPrice">${{ product.price }}</div>
+            </div>
+            <div class="productVariants">
+                <form method="post" action="{% url 'add_to_cart' product.id %}" id="addToCartForm">
+                    {% csrf_token %}
+                    <div class="ProductSizeRow">
+                      {% for variant in product.variants.all %}
+                        {% if variant.size %}
+                          <div class="productVariantSizes">
+                            <button
+                              type="button"
+                              class="productSizeButtons"
+                              data-variant-id="{{ variant.id }}">
+                                {{ variant.size }}
+                            </button>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  
+                      <!-- Hidden input for selected variant -->
+                      <input type="hidden" name="variant_id" id="selectedVariantId" value="">
+                  
+                      <label for="quantity">Quantity:</label>
+                      <input type="number" name="quantity" value="1" min="1">
+                  
+                      <!-- Disabled until a variant is selected -->
+                      <button id="addToCartBtn" type="submit" class="add-to-cart-btn" disabled>Add to Cart</button>
+                    </div>
+                  </form>
+                  <div id="cartStatus"></div>                           
+            </div>
+        </div>
+    </div>
+{% endblock %}

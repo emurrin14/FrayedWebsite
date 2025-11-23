@@ -1,0 +1,99 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+.gridContainer .productImageGridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+.gridContainer .imageContainer {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+.gridContainer .imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.productDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+.productDetailsContainer .productTags {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.productTags p {
+  font-size: 1rem;
+  background-color: #ccc;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+.productInformation {
+  margin-bottom: 3rem;
+}
+.productTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.productPrice {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.productVariantSizes {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+.ProductSizeRow{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.productSizeButtons {
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.2s;
+}
+.productSizeButtons.active {
+  background-color: #111;
+  color: #fff;
+  border-color: #111;
+}
+.add-to-cart-btn {
+  padding: 10px 20px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-to-cart-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+.productSizeButtons.active-size {
+  border: 2px solid var(--accent);
+  background-color: var(--accent);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+}

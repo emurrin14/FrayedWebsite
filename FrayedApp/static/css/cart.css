@@ -1,0 +1,141 @@
+:root {
+  --main: #ffffff;
+  --bg: #222222;
+  --card: #ffffff;
+  --hover: #72a7db;
+  --accent: ;
+  --text: #013328;
+  --textbefore: #005c48;
+  --textopp: #2f181b;
+  --gap: 1rem;
+  --max-width: 600px;
+  --border: 1px solid #ccc;
+}
+@font-face {
+  font-family: "BCsklonar";
+  src: url("{% static 'fonts/bc-sklonar-light.woff2' %}") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "BCsklonar";
+  src: url("{% static 'fonts/bc-sklonar-bold.woff2' %}") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: block;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+img {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+* {
+  margin: 0px;
+  font-family: "BCsklonar", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.YourCart {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 2rem;
+  text-wrap: nowrap;
+}
+.CartContainer {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.CartInfoTopbar {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  border-bottom: 2px solid #ccc;
+}
+.CartInfoTopbar p:nth-child(1) {
+  flex: 3;
+}
+.CartInfoTopbar p:nth-child(2) {
+  flex: 1;
+}
+.CartInfoTopbar p:nth-child(3) {
+  flex: 1;
+}
+.CartInfoTopbar p:nth-child(4) {
+  flex: 1;
+}
+
+.ItemContainer {
+  display: flex;
+  width: 100%;
+  height: 8rem;
+  flex-direction: row;
+  padding: 1rem 0;
+  border-bottom: 2px solid #ccc;
+}
+.ItemVariantDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ItemDetails {
+  display: flex;
+  flex: 3;
+  flex-direction: row;
+}
+.ItemDetails .ItemVariantDetails {
+  display: flex;
+  flex-direction: column;
+}
+.ItemDetails .ItemRemove {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ItemContainer .ItemImage {
+  height: 100%;
+  aspect-ratio: 1/1;
+  width: auto;
+  margin-right: 1rem;
+}
+.ItemContainer .ItemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ItemPrice {
+  flex: 1;
+}
+.ItemQuantity {
+  flex: 1;
+}
+.ItemTotal {
+  flex: 1;
+}
+.EmptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 10rem 0 14rem 0;
+}
+#shopNow {
+  margin-top: 2rem;
+}

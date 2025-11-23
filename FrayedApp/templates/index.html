@@ -1,8 +1,60 @@
-{% extends 'core.html' %}
-{%load static%}
-
-{%block title%}Frayed{%endblock%}
+{% extends "core.html" %}
+{% load static %}
+{% block title %}Homepage{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% endblock %}
 
 {% block content %}
-  <h1>Hello</h1>
-{% endblock content %}
+<div class="landingImageGrid">
+  <!-- FIRST IMAGE -->
+  <img src="{% static 'images/landingImage0.PNG' %}" alt="" />
+  <!-- SECOND IMAGE -->
+  <figure class="landingImagePanelMiddle">
+    <img src="{% static 'images/landingImage1.PNG' %}" alt="" />
+    <figcaption class="landingImageText">
+      <div class="1">OUR FIRST DROP</div>
+      <div class="2">The First.</div>
+      <a href="#"> </a>
+    </figcaption>
+  </figure>
+  <!-- THIRD IMAGE -->
+  <img src="{% static 'images/landingImage2.PNG' %}" alt="" />
+</div>
+
+<div class="productGridContainer">
+  <section class="productFirstDiv">
+    <h1>New Drops</h1>
+      <a href="#">
+        <button class="productFirstDivButton">Shop All</button>
+    </a>
+  </section>
+    {% if new_products %}
+      {% for product in new_products|slice:":7" %}
+        {% with images=product.images.all %}
+          <figure class="productFigure">
+            <div class="productFigureImage">
+              {% if images %}
+              <a href="{% url 'product' product.slug %}">
+                <img
+                  src="{{ product.image0.url }}"
+                  alt="{{ product.title }}"
+                  class="mainImage"
+                />
+              </a>
+              {% endif %}
+            </div>
+            <a href="{% url 'product' product.slug %}">
+              <figcaption class="productFigureDetails">
+                <p class="productTitle">{{ product.title }}</p>
+                <p class="productPrice">${{ product.price }}</p>
+              </figcaption>
+            </a>
+          </figure>
+        {% endwith %}
+      {% endfor %}
+    {% else %}
+          <div class="noProductsAvailable">No Products Available</div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -3,8 +3,78 @@
 {% block title %}Cart{% endblock %}
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+<script src="https://js.stripe.com/clover/stripe.js"></script>
 {% endblock %}
 
 {% block content %}
 
+{% if items %}
+  {% if cart.total_items == 1 %}
+    <h1 class="YourCart">Your Cart ({{ cart.total_items }} item):</h1>
+  {% else %}
+    <h1 class="YourCart">Your Cart ({{ cart.total_items }} items):</h1>
+  {% endif %}
+{% endif %}
+
+{%if items%}
+<div class="CartInfoTopbar">
+  <p>Item</p>
+  <p>Price</p>
+  <p>Quantity</p>
+  <p>Total</p>
+</div>
+<div class="CartContainer">
+  {%for item in items%}
+    <div class="ItemContainer">
+      <div class="ItemDetails">
+          <div class="ItemImage">
+            <img src="{{ item.product.image0.url  }}" alt="{{ item.product.name }}">
+          </div>
+          <div class="ItemVariantDetailsContainer">
+            <div class="ItemVariantDetails">
+              <p>{{ item.product.name }}</p>
+              {%if item.size%}
+                <p>Size: {{  item.size.name }}</p>
+              {%endif%}
+
+              {%if item.variant.color%}
+                <p>Color: {{  item.variant.color.name }}</p>
+              {%endif%}
+
+              {%if item.product.isinstock%}
+                <p class="ItemVariant">In Stock</p>
+              {%else%}
+                <p class="ItemVariant">Not In Stock</p>
+              {%endif%}
+            </div>
+            <form method="post" action="{% url 'remove_from_cart' item.id %}" id="removeFromCartForm">
+              {% csrf_token %}
+              <button type="submit" id="removeFromCartButton" class="ItemRemove">Remove</button>
+            </form>
+          </div>
+      </div>
+      <div class="ItemPrice">
+        {{ item.product.price }}
+      </div>
+      <div class="ItemQuantity">
+        {{ item.quantity }}
+      </div>
+      <div class="ItemTotal">
+        {{ item.subtotal }}
+      </div>
+    </div>
+  {%endfor%}
+  <div class="CheckoutContainer">
+    <form action="{% url 'create-checkout-session' %}" method="POST">
+      <button type="submit" id="checkout-button">Checkout</button>
+    </form>
+  </div>
+</div>
+{%else%}
+  <div class="EmptyCart">
+    <p>Your Cart Is Empty.</p>
+    <a href="{% url 'index' %}" id="shopNow" class="DefaultButtonMed">Shop Now!</a>
+  </div>
+
+{%endif%}
 {%endblock%}

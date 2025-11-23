@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Product, ProductImage, Size, Color, Product_Variant
+from django.contrib.auth.admin import UserAdmin
+from .models import Product, ProductImage, Size, Color, Product_Variant, CustomUser
 
 # Inline for Product Images so you can add/edit images directly in Product admin
 class ProductImageInline(admin.TabularInline):
@@ -51,3 +52,21 @@ class ProductVariantAdmin(admin.ModelAdmin):
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ('product', 'order', 'image')
     list_filter = ('product',)
+
+@admin.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+    list_display = ('email', 'is_staff', 'is_active')
+    ordering = ('email',)
+    search_fields = ('email',)
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Important dates', {'fields': ('last_login',)}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2', 'is_active', 'is_staff')}
+        ),
+    )

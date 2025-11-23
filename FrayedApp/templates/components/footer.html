@@ -1,0 +1,95 @@
+{% load static %}
+{% block content %}
+<div class="footerContainer">
+      <div class="footerTop">
+        <a href="#" class="footerLink">SHOP</a>
+        <a href="#" class="footerLink">ABOUT US</a>
+        <a href="#" class="footerLink">CONTACT</a>
+        <a href="#" class="footerLink">TERMS OF SERVICE</a>
+        <a href="#" class="footerLink">PRIVACY POLICY</a>
+      </div>
+      <section class="footerMiddle">
+        <div class="footerMiddle0">
+          <div>
+            <img
+              class="footerFrayedLogo"
+              src="{% static 'images/logowhite.png' %}"
+              alt="FRAYED LOGO"
+            />
+            <div class="socialLinksContainer">
+              <a href="#" class="footerSocialIcon">
+               <img src="{% static 'images/tiktok.svg' %}" alt="TikTok">
+              </a>
+              <a href="#" class="footerSocialIcon">
+                <img src="{% static 'images/instagram.svg' %}" alt="Instagram">
+              </a>
+              <a href="#" class="footerSocialIcon">
+                <img src="{% static 'images/discord.svg' %}" alt="Discord">
+              </a>
+            </div>
+          </div>
+          <form method="post">
+            <input
+              class="inputEmail"
+              name="email"
+              id="email"
+              type="email"
+              placeholder="Email"
+              required
+            />
+            <input class="inputSubscribe" type="submit" value="Subscribe" />
+          </form>
+        </div>
+        <div class="footerMiddle1">
+          <a class="footerHeader">Information</a>
+          <a class="footerText">Support</a>
+          <a class="footerText">Events</a>
+          <a class="footerText">Size Guide</a>
+        </div>
+        <div class="footerMiddle2">
+          <a href="#" class="footerHeader">Support</a>
+          <a class="footerText">Returns</a>
+          <a class="footerText">Track Orders</a>
+          <a class="footerText">Our Story</a>
+          <a class="footerText">Contact Us</a>
+        </div>
+      </section>
+
+      <section class="footerBottom">
+        <p>&copy; 2025 FRAYED. ALL RIGHTS RESERVED.</p>
+        <div>PAYMENT OPTIONS</div>
+      </section>
+    </div>
+    <!-- FOR MOBILE ONLY -->
+    <div class="footerAccordianContainer">
+      <div class="footerAccordianSocials">
+        <a href="#" class="footerSocialIcon">
+          <img src="{% static 'images/tiktok.svg' %}" alt="Tiktok">
+        </a>
+        <a href="#" class="footerSocialIcon">
+          <img src="{% static 'images/instagram.svg' %}" alt="Instagram">
+        </a>
+        <a href="#" class="footerSocialIcon">
+          <img src="{% static 'images/discord.svg' %}" alt="Discord">
+        </a>
+      </div>
+      <div id="footerInformationBtn">
+        <p>Information</p>
+        <img src="{% static 'images/downArrow.svg' %}" alt="Dropdown" />
+      </div>
+      <div id="footerSupportBtn">
+        <p>Support</p>
+        <img src="{% static 'images/downArrow.svg' %}" alt="Dropdown" />
+      </div>
+      <div id="footerSocialsBtn">
+        <p>Socials</p>
+        <img src="{% static 'images/downArrow.svg' %}" alt="Dropdown" />
+      </div>
+    </div>
+    <div class="footerBottomAccordian">
+      <div>
+        <p>&copy; 2025 FRAYED. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div>PAYMENT OPTIONS</div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static %}
+<header class="headerContainer">
+  <!-- header left group -->
+  <div class="headerLeft">
+    <a href="{% url 'index' %}" class="headerTitle">
+      <img src="{% static 'images/logo.png' %}" alt="Home" />
+    </a>
+    <a class="headerLinkText" href="#">New Arrivals</a>
+    <a class="headerLinkText" href="#">Denim</a>
+    <a class="headerLinkText" href="#">Shirts</a>
+    <a class="headerLinkText" href="#">Track Orders</a>
+  </div>
+  <!-- header left hamburger menu (max-width: 768px) -->
+  <div class="headerHamburger">
+    <img id="hamburgerOpen" src="{% static 'images/HamburgerMenu.svg' %}" alt="Menu" />
+  </div>
+  <!-- header right group -->
+  <div class="headerRight">
+    <a href="{% url 'cart' %}">
+      <img id="cartBtn" src="{% static 'images/cart.svg' %}" alt="Cart" />
+    </a>
+    <img id="profileBtn" src="{% static 'images/profile.svg' %}" alt="Profile" />
+  </div>
+  <div id="profileDropdown" class="profileDropdown">
+    {% if user.is_authenticated %}
+      <a href="{% url 'index' %}">Account</a>
+      <a href="{% url 'index' %}">Log Out</a>
+    {% else %}
+      <a href="{% url 'index' %}">Account</a>
+      <a href="{% url 'index' %}">Log In</a>
+    {% endif %}
+    {% if user.is_authenticated and user.is_staff %}
+      <p>Admin Panel</p>
+    {% endif %}
+  </div>
+</header>
+<div id="hamburgerMenuOverlay" class="hamburgerMenuOverlay"></div>
+<div id="hamburgerMenuContainer" class="hamburgerMenuContainer">
+  <div>
+    <img id="hamburgerClose" src="{% static 'images/HamburgerClose.svg' %}" alt="Close" />
+  </div>
+  <div>New Arrivals</div>
+  <div>Denim</div>
+  <div>Shirts</div>
+  <div>Track Orders</div>
+</div>
