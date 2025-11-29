@@ -1,0 +1,39 @@
+{% extends "core.html" %}
+{% load static %}
+{% block title %}Tags{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/producttags.css' %}" />
+<style></style>
+{% endblock %}
+{% block content %}
+{% include 'components/filters.html' %}
+<div class="productGridContainer">
+    {% if products %}
+      {% for product in products %}
+        {% with images=product.images.all %}
+          <figure class="productFigure">
+            <div class="productFigureImage">
+              {% if images %}
+              <a href="{% url 'product' product.slug %}">
+                <img
+                  src="{{ product.image0.url }}"
+                  alt="{{ product.title }}"
+                  class="mainImage"
+                />
+              </a>
+              {% endif %}
+            </div>
+            <a href="{% url 'product' product.slug %}">
+              <figcaption class="productFigureDetails">
+                <p class="productTitle">{{ product.title }}</p>
+                <p class="productPrice">${{ product.price_display }}</p>
+              </figcaption>
+            </a>
+          </figure>
+        {% endwith %}
+      {% endfor %}
+    {% else %}
+          <div class="noProductsAvailable">No Products Available</div>
+    {% endif %}
+</div>
+{% endblock %}

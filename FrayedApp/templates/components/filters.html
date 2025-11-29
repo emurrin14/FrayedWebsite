@@ -1,0 +1,29 @@
+{% load static %}
+<header class="FilterContainer">
+  <div class="FilterLeft">
+    <a href="{% url 'producttags' tag_slug='new' %}" 
+      class="{% if tag.slug == 'new' %}active-tag{% endif %}">
+      New Drops
+    </a>
+
+    <a href="{% url 'comingsoon' %}"
+      class="{% if tag.slug == 'denim' %}active-tag{% endif %}">
+      Denim
+    </a>
+
+    <a href="{% url 'producttags' tag_slug='shirts' %}"
+      class="{% if tag.slug == 'denim' %}active-tag{% endif %}">
+      Shirts
+    </a>
+
+    <a href="{% url 'comingsoon' %}"
+      class="{% if tag.slug == 'denim' %}active-tag{% endif %}">
+      Jackets
+    </a>
+
+    <a href="{% url 'comingsoon' %}"
+      class="{% if tag.slug == 'denim' %}active-tag{% endif %}">
+      More
+    </a>
+  </div>
+</header>

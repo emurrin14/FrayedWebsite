@@ -1,2 +1,39 @@
 .env
 chromevenv
+
+# Ignore __pycache__ directories
+__pycache__/
+
+# Ignore .pyc files (optional, as __pycache__ typically handles this)
+*.pyc
+
+# Python bytecode
+*.pyc
+__pycache__/
+
+# Virtual environment
+.env/
+venv/
+env/
+myvenv/
+
+# Database
+db.sqlite3
+
+# Media and static files (if served locally)
+/media/
+/static_collected/
+
+# IDE-specific files (e.g., PyCharm)
+.idea/
+*.iml
+
+# Log files
+*.log
+
+# Sensitive information (e.g., local settings)
+local_settings.py
+
+# Operating System files
+.DS_Store
+Thumbs.db
