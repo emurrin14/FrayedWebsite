@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% load static %}
+  <title>Login or Sign Up</title>
+  <link rel="stylesheet" href="{% static 'css/LoginSignup.css' %}">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+</head>
+<body>
+  <div class="LoginContainer">
+    <img src="{% static 'images/FRAYED-transparent.png' %}" alt="Frayed" class="LoginLogo">
+    <h1 class="LoginLogin">SignUp</h1>
+    <form id="SignUpForm" method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div id="errorDiv">
+        {{ form.non_field_errors.0 }}
+      </div>
+      {% endif %}
+      <div class="LoginEmail">
+        <p>Email</p>
+          <input class="SignUpEmailInput" id="LoginEmailInput" type="email" name="email" placeholder="Type Your Email" required>
+          {% if form.email.errors %}
+          <div style="color: red; font-size: 12px;">{{ form.email.errors.0 }}</div>
+          {% endif %}
+      </div>
+      <div class="LoginPassword">
+        <p>Password</p>
+        <input class="SignUpPasswordInput" id="LoginPasswordInput" type="password" name="password1" placeholder="Type Your Password" required>
+        {% if form.password1.errors %}
+        <div style="color: red; font-size: 12px;">{{ form.password1.errors.0 }}</div>
+        {% endif %}
+      </div>
+      <div class="ConfirmPassword">
+        <p>Confirm Password</p>
+        <input class="SignUpPassword2Input" id="ConfirmPasswordInput" type="password" name="password2" placeholder="Confirm Your Password" required>
+        {% if form.password2.errors %}
+        <div style="color: red; font-size: 12px;">{{ form.password2.errors.0 }}</div>
+        {% endif %}
+      </div>
+    </form>
+      {% if messages %}
+      <div id="errorDiv">
+        {% for message in messages %}
+        <div style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    <button form="SignUpForm" type="submit">Sign Up</button>
+    <div class="SignUpLink" style="margin-top: 20px;">
+      <p>Already have an account?</p>
+      <a href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+</body>
+<script src="{% static 'js/LoginSignupScript.js' %}"></script>
+</html>

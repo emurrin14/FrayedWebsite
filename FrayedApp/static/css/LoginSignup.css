@@ -1,0 +1,164 @@
+:root {
+  --main: #ffffff;
+  --bg: #222222;
+  --card: #ffffff;
+  --hover: #72a7db;
+  --accent: ;
+  --text: #013328;
+  --textbefore: #005c48;
+  --textopp: #2f181b;
+  --gap: 1rem;
+  --max-width: 600px;
+  --border: 1px solid #ccc;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+input {
+  background-color: #fff;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  color: #535353;
+  padding: 10px 5px;
+  width: 100%;
+  font-size: 0.8rem;
+  border-radius: 0;
+  outline: none;
+}
+
+/* prevent focus change */
+input:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #454545;
+  color: #535353;
+  outline: none;
+  box-shadow: none;
+}
+
+/* override browser autofill background */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+  -webkit-text-fill-color: #535353 !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Firefox autofill override */
+input:-moz-autofill {
+  box-shadow: 0 0 0 1000px #fff inset !important;
+  -moz-text-fill-color: #535353 !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  height: auto;
+  align-items: center;
+  border: 2px solid #ccc;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 2rem 0 2rem 0;
+}
+.LoginContainer p {
+  margin: 0;
+}
+.LoginLogo {
+  width: 60%;
+  height: auto;
+}
+.LoginLogin {
+  font-size: 2rem;
+  margin: 1rem 0 0 0;
+}
+.LoginContainer form {
+  width: 80%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#LoginEmailInput {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  padding: 1rem 0 1rem 0.5rem;
+  margin-bottom: 2rem;
+}
+
+#LoginPasswordInput {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  padding: 1rem 0 1rem 0.5rem;
+}
+.LoginEmail {
+  display: flex;
+  flex-direction: column;
+}
+.LoginPassword {
+  display: flex;
+  flex-direction: column;
+}
+.ConfirmPassword {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+#ConfirmPasswordInout {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  padding: 1rem 0 1rem 0.5rem;
+}
+.ForgotPassword {
+  display: flex;
+  margin-top: 0.5rem;
+  width: 80%;
+  justify-content: flex-end;
+}
+.ForgotPassword a {
+  color: #535353;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+.ForgotPassword a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.LoginContainer button {
+  margin-top: 1rem;
+  border-radius: 10px;
+  padding: 1rem 0 1rem 0;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 70%;
+  cursor: pointer;
+  border: none;
+  color: white;
+  background-color: var(--textbefore);
+}
+.LoginContainer button:hover {
+  background-color: var(--text);
+}
+.SignUpLink {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+}
+#errorDiv {
+  width: 80%;
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}

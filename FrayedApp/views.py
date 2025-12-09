@@ -4,11 +4,15 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadReque
 from django.views.decorators.csrf import csrf_exempt
 import stripe
 from django.utils.timezone import localtime
-from .models import Product, Product_Variant, Cart, CartItem, Size
+from .models import Product, Product_Variant, Cart, CartItem, Size, EmailVerificationToken
 from .forms import CustomLoginForm, CustomUserCreationForm
 import json
 from django.views.decorators.http import require_POST
 from django.urls import reverse
+from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -144,3 +148,85 @@ def success_view(request):
 
 def cancel_view(request):
    return render(request, 'cancel.html')
+
+# USER LOGIN AND REGISTRATION VIEWS
+
+def signup_view(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Create verification token
+            token = EmailVerificationToken.objects.create(user=user)
+            # Send verification email
+            verification_url = request.build_absolute_uri(
+                reverse('verify_email', kwargs={'token': token.token})
+            )
+            send_mail(
+                'Verify your email address',
+                f'Please click the following link to verify your email address:\n\n{verification_url}\n\nThis link will expire in 24 hours.',
+                settings.DEFAULT_FROM_EMAIL,
+                [user.email],
+                fail_silently=False,
+            )
+            messages.success(
+                request,
+                'Registration successful! Please check your email to verify your account before logging in.'
+            )
+            return redirect("login")
+    else:
+        form = CustomUserCreationForm()
+    return render(request, "signup.html", {"form": form})
+
+
+def login_view(request):
+    # Redirect if already logged in
+    if request.user.is_authenticated:
+        return redirect("index")
+    
+    if request.method == "POST":
+        form = CustomLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            # Check if email is verified
+            if not user.email_verified:
+                messages.error(
+                    request,
+                    'Your email address has not been verified. Please check your email and click the verification link.'
+                )
+                return render(request, "login.html", {"form": form})
+            login(request, user)
+            # Redirect to next page if specified, otherwise to index
+            next_url = request.GET.get('next', 'index')
+            return redirect(next_url)
+        else:
+            return render(request, "login.html", {"form": form})
+    else:
+        form = CustomLoginForm()
+
+    return render(request, "login.html", {"form": form})
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect("login")
+
+def verify_email(request, token):
+    try:
+        verification_token = EmailVerificationToken.objects.get(token=token)
+        if verification_token.is_valid():
+            user = verification_token.user
+            user.email_verified = True
+            user.is_active = True
+            user.save()
+            verification_token.is_used = True
+            verification_token.save()
+            messages.success(request, 'Your email has been verified successfully! You can now log in.')
+            return redirect('login')
+        else:
+            messages.error(request, 'This verification link has expired or has already been used.')
+            return redirect('signup')
+    except EmailVerificationToken.DoesNotExist:
+        messages.error(request, 'Invalid verification link.')
+        return redirect('signup')
